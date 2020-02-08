@@ -19,24 +19,24 @@ if(!isset($this->session->userdata['masuk'])){
 
 	
 	// integrate bootstrap pagination
-		$config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-left">';
+		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = false;
 		$config['last_link'] = false;
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li class="page-item"><a href="#" class="page-link">';
+		$config['first_tag_close'] = '</a></li>';
 		$config['prev_link'] = '«';
-		$config['prev_tag_open'] = '<li class="prev">';
-		$config['prev_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['prev_tag_close'] = '</div></li>';
 		$config['next_link'] = '»';
-		$config['next_tag_open'] = '<li>';
-		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['next_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['next_tag_close'] = '</div></li>';
+		$config['last_tag_open'] = '<li class="page-item"><a href="#" class="page-link">';
+		$config['last_tag_close'] = '</a></li>';
+		$config['cur_tag_open'] = '<li class="active page-item"><a href="#" class="page-link">';
 		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['num_tag_close'] = '</div></li>';
 
 	$jumlah=$this->mymodel->jumlahdata('barang');
 	$config['base_url']=base_url('admin/index');
@@ -54,24 +54,24 @@ if(!isset($this->session->userdata['masuk'])){
 function pelanggan(){
 
 	// integrate bootstrap pagination
-		$config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-left">';
+		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_link'] = false;
 		$config['last_link'] = false;
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li class="page-item"><a href="#" class="page-link">';
+		$config['first_tag_close'] = '</a></li>';
 		$config['prev_link'] = '«';
-		$config['prev_tag_open'] = '<li class="prev">';
-		$config['prev_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['prev_tag_close'] = '</div></li>';
 		$config['next_link'] = '»';
-		$config['next_tag_open'] = '<li>';
-		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['next_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['next_tag_close'] = '</div></li>';
+		$config['last_tag_open'] = '<li class="page-item"><a href="#" class="page-link">';
+		$config['last_tag_close'] = '</a></li>';
+		$config['cur_tag_open'] = '<li class="active page-item"><a href="#" class="page-link">';
 		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li class="page-item"><div class="page-link">';
+		$config['num_tag_close'] = '</div></li>';
 
 	$jumlah=$this->mymodel->jumlahdata('pelanggan');
 	$config['base_url']=base_url('admin/pelanggan');
