@@ -46,8 +46,8 @@ if(!isset($this->session->userdata['masuk'])){
 	$this->pagination->initialize($config);
 	$from=$this->uri->segment(3);
 	$hasil=$this->mymodel->paging('barang',$config['per_page'],$from);
-
-	$data = array('databarang' => $hasil );
+	$all = $this->mymodel->semuadata('barang');
+	$data = array('databarang' => $hasil ,'data' => $all);
 	$this->load->view('barang',$data);
 }
 
@@ -81,8 +81,8 @@ function pelanggan(){
 	$this->pagination->initialize($config);
 	$from=$this->uri->segment(3);
 	$hasil=$this->mymodel->paging('pelanggan',$config['per_page'],$from);
-
-	$data = array('datapembeli' => $hasil );
+	$all = $this->mymodel->semuadata('pelanggan');
+	$data = array('datapembeli' => $hasil, 'data' => $all );
 	$this->load->view('pembeli',$data);
 }
 

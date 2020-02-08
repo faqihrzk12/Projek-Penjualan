@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Rumahku.com</title>
+  <link rel="icon" type="image/png" href="../images/logo1.jpg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php

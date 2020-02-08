@@ -5,6 +5,7 @@
   <?php $vendorDirectory = base_url('/mcvendor/admin/') ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="../images/logo1.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -33,8 +34,8 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <img src="../images/logo1.jpg" style="width:100%;height:100%">
         </div>
         <div class="sidebar-brand-text mx-3">Rumahku.com</div>
       </a>
@@ -177,28 +178,28 @@
                       <th><button> <a href="<?php echo base_url('admin/tambahpembeli')?>"> <span class="glyphicon glyphicon-plus" ></span> <b>+</b> New </a></button></th>
                     </tr>
                   </thead>
+                  <tbody>
                   <?php
                   $n=0;
-                  foreach ($datapembeli as $row ) {
+                  foreach ($data as $row ) {
                     $n++;?>
-
-                    <tbody>
+                    <tr>
                       <td><?php echo $n;?></td>
                       <td><?php echo $row->id_pelanggan;?></td>
                       <td><?php echo $row->nama_pelanggan;?></td>
                       <td><?php echo $row->alamat;?></td>
                       <td><?php echo $row->telepon;?></td>
-                      <td><a href="<?php echo base_url('admin/editpembeli/').$row->id_pelanggan ?>" title='edit'> <span class="glyphicon glyphicon-edit"></span > Edit | </a> 
+                      <td><a class="btn btn-info" href="<?php echo base_url('admin/editpembeli/').$row->id_pelanggan ?>" title='edit'> <i class="fas fa-edit"></i> Edit | </a> 
 
 
-                          <a href="<?php echo base_url('admin/deletepembeli/').$row->id_pelanggan ?>" title="delete"
+                          <a class="btn btn-danger" href="<?php echo base_url('admin/deletepembeli/').$row->id_pelanggan ?>" title="delete"
                           onclick='return confirm("benar data barang akan dihapus ?");'>  
-                          <span class="glyphicon glyphicon-remove"></span> Delete</a>
+                          <i class="fas fa-trash"></i> Delete</a>
                       </td>
+                    </tr>
 
-
-                    </tbody>
                   <?php } ?>
+                  </tbody>
                 </table>
                 <?php
                   echo $this->pagination->create_links();
@@ -269,10 +270,6 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
-        "bInfo": false
       } );
   </script>
 

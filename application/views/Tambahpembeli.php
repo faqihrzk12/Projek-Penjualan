@@ -4,6 +4,7 @@
 <head>
   <?php $vendorDirectory = base_url('/mcvendor/admin/') ?>
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="../images/logo1.jpg">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -33,8 +34,8 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <img src="../images/logo1.jpg" style="width:100%;height:100%">
         </div>
         <div class="sidebar-brand-text mx-3">Rumahku.com</div>
       </a>
@@ -186,21 +187,30 @@
                   <form class="form-horizontal" action="<?php echo base_url('admin/savepembeli')?>" method="post" name="form">
                     <div class="form-group">
                       <label class="col-sm-2 control-label" > Kode </label>
-                      <div class="col-sm-4">
+                      <div class="input-group col-sm-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">#</span>
+                        </div>
                         <input type="text" name="kode" class="form-control" placeholder="Kode">
                       </div>
                     </div>
 
                     <div class="form-group">  
                       <label class="col-sm-2 control-label" > Nama Pembeli </label>
-                      <div class="col-sm-4">
+                      <div class="input-group col-sm-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                        </div>
                         <input type="text" name="nama" class="form-control" placeholder="Nama Pembeli">
                       </div>
                     </div>
                     
                     <div class="form-group">  
                       <label class="col-sm-2 control-label" > Alamat </label>
-                      <div class="col-sm-4">
+                      <div class="input-group col-sm-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+                        </div>
                         <input type="text" name="alamat" class="form-control" placeholder="Alamat">
                       </div>
                     </div>
@@ -208,7 +218,10 @@
 
                     <div class="form-group">  
                       <label class="col-sm-2 control-label" > No.Telepon </label>
-                      <div class="col-sm-4">
+                      <div class="input-group col-sm-4">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                        </div>
                         <input type="number" name="telpon" class="form-control" placeholder="No.Telepon">
                       </div>
                     </div>
@@ -219,9 +232,9 @@
                     <div class="form-group">  
                     <div class="col-sm-4 control-label">
                        <label class="col-sm-2 control-label" ></label>
-                       <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"> Simpan </span></button>  
+                       <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"><i class="fas fa-save"></i> Simpan </span></button>  
                     </div>
-                      <a href="../index.php" class="btn btn-secondary btn-sm float-right"><span class='glyphicon glyphicon-arrow-left'></span> Kembali</a>
+                      <a href="../index.php" class="btn btn-secondary btn-sm float-right"><i class="fas fa-arrow-left"></i> Kembali</a>
                     </div>
                   </form>
                 </div>

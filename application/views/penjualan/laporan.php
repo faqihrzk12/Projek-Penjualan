@@ -4,6 +4,7 @@
 <head>
   <?php $vendorDirectory = base_url('/mcvendor/admin/') ?>
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="../images/logo1.jpg">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -33,8 +34,8 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <img src="../images/logo1.jpg" style="width:100%;height:100%">
         </div>
         <div class="sidebar-brand-text mx-3">Rumahku.com</div>
       </a>
@@ -380,10 +381,6 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
-        "bInfo": false
       } );
   </script>
 

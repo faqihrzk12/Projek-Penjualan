@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <link rel="icon" type="image/png" href="../images/logo1.jpg">
   <title>Rumahku.com</title>
 
   <!-- Custom fonts for this template-->
@@ -39,8 +39,8 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+          <img src="../images/logo1.jpg" style="width:100%;height:100%;">
         </div>
         <div class="sidebar-brand-text mx-3">Rumahku.com</div>
       </a>
@@ -284,7 +284,7 @@
                   <span><?php echo number_format($row->total,0);?></span>
                 </td>
                 <td >
-                  <a href="javascript:;" data-id="<?php echo $row->id_detil?>" data-toggle="modal"  data-target="#modal-konfirmasi" class="btn btn-danger btn-xs" title="Hapus">X</a>
+                  <a href="javascript:;" data-id="<?php echo $row->id_detil?>" data-toggle="modal"  data-target="#modal-konfirmasi" class="btn btn-danger btn-xs" title="Hapus"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>  
@@ -328,7 +328,7 @@
                   <span></span>
                 </td>
                 <td >
-                  <button type="submit" class="btn btn-success btn-xs" title="Tambah" >+</button>
+                  <button type="submit" class="btn btn-success btn-xs" title="Tambah" ><i class="fas fa-plus"></i></button>
                 </td>
               
             </tbody>
