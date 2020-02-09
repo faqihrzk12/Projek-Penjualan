@@ -189,12 +189,12 @@
                       <td><?php echo $row->nama_pelanggan;?></td>
                       <td><?php echo $row->alamat;?></td>
                       <td><?php echo $row->telepon;?></td>
-                      <td><a class="btn btn-info" href="<?php echo base_url('admin/editpembeli/').$row->id_pelanggan ?>" title='edit'> <i class="fas fa-edit"></i> Edit | </a> 
+                      <td><a class="btn btn-info" href="<?php echo base_url('admin/editpembeli/').$row->id_pelanggan ?>" title='edit'> <i class="fas fa-edit"></i> Edit </a> 
 
 
                           <a class="btn btn-danger" href="<?php echo base_url('admin/deletepembeli/').$row->id_pelanggan ?>" title="delete"
                           onclick='return confirm("benar data barang akan dihapus ?");'>  
-                          <i class="fas fa-trash"></i> Delete</a>
+                          <i class="fas fa-edit"></i> Delete</a>
                       </td>
                     </tr>
 

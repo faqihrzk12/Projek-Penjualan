@@ -233,6 +233,7 @@
                        <label class="col-sm-2 control-label" ></label>
                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"><i class="fas fa-save"></i> Simpan </span></button>  
                     </div>
+                      <a href="../index" class="btn btn-secondary btn-sm float-right"><i class="fas fa-arrow-left"></i> Kembali</a>
                     </div>
                   </form>
                 </div>

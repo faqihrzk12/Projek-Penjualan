@@ -219,113 +219,61 @@
                   <h6 class="m-0 font-weight-bold text-primary">Laporan</h6>
                 </div>
                 <div class="card-body">
+                  <?php 
+                    if ($this->session->muncul == TRUE) {
+                  ?>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th style="width:35px">#</th>
+                            <th style="width:200px">Tanggal</th>
+                            <th style="width:210px">Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th style="width: 120px;text-align: left;">Harga Satuan</th>
+                            <th style="width: 75px">Qty</th>
+                            <th style="width: 125px;text-align: left;" > Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                          $n = 1; 
+                          foreach ($laporan as $row) {
+                        ?>
+                            <tr>
+                              <td><?php echo $n;?></td>
+                              <td><?php echo $row->tanggal;?></td>
+                              <td><?php echo $row->kode_barang;?></td>
+                              <td><?php echo $row->nama_barang;?></td>
+                              <td><?php echo $row->harga_satuan;?></td>
+                              <td><?php echo $row->jumlah_beli;?></td>
+                              <td><?php echo number_format($row->total,0);?></td>
+                            </tr>
+                      <?php
+                            $n++;
+                          }
+                        ?>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <div class='col-sm-2'>
+                    <a class="btn btn-danger btn-block" href="<?php echo base_url('penjualan/cetakbarang')?>" role='button' data-toggle='tooltip'><span class="glyphicon glyphicon-print "></span> Print Pdf</a>
+                  </div>
                   <?php
-          if ($this->session->muncul==TRUE){
-?>
-<div class="panel panel-primary">
-
-        <div class="panel panel-heading"> <h5><i class="glyphicon glyphicon-shopping-cart"></i> Laporan Transaksi Dari <?php echo $tglawal;?> Sampai Tanggal <?php echo $tglakhir;?></h5></div>
-        <div class="panel panel-body">
-              
-              <table class="table">
-              <thead>
-                <tr class="info">
-                  <th style="width:35px">#</th>
-                   <th style="width:200px">Tanggal</th>
-
-                  <th style="width:210px">Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th style="width: 120px;text-align: left;">Harga Satuan</th>
-                  <th style="width: 75px">Qty</th>
-                  <th style="width: 125px;text-align: left;" > Total</th>
-                  
-                </tr>
-              </thead>
-
-              <?php 
-
-              $n=0;$ttotal=0;$tqty=0;
-              foreach ($laporan as $row) {
-                $n++;$ttotal=$ttotal+$row->total;
-                $tqty=$tqty+$row->jumlah_beli;
-              
-
-
-              ?>
-              <tbody>
-                <tr>
-                  <td><?php echo $n;?>
-                    
-                  </td>
-                  
-                  <td>
-                      <?php echo $row->tanggal;?>
-
-                  </td>
-                  <td>
-                          <?php echo $row->kode_barang;?>
-
-                  
-                  </td>
-                  <td>
-                          <?php echo $row->nama_barang;?>
-
-                  </td>
-                  <td>
-                              <?php echo $row->harga_satuan;?>
-
-                  </td>
-                  <td>
-                            <?php echo $row->jumlah_beli;?>
-
-                  </td>
-                  <td>
-                    
-                            <?php echo number_format($row->total,0);?>
-
-                  </td>
-                  
-                </tr>
-
-              </tbody>
-              <?php } ?>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <?php echo $tqty;?>
-
-                  </td>
-                  <td>
-                      <?php echo number_format($ttotal,0);?>
-
-                  </td>
-                </tr>
-              </tbody>
-          
-          </table>
-        </div>
-        </div>
-                <div class='col-sm-2'>
-                  <a class="btn btn-danger btn-block" href="<?php echo base_url('penjualan/cetakbarang')?>" role='button' data-toggle='tooltip'><span class="glyphicon glyphicon-print "></span> Print Pdf</a>
-                  
-                <?php }?>
+                    } 
+                  ?>
                 </div>
-              </div>
 
             </div>
 
@@ -393,11 +341,60 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
-        "bInfo": false
-      } );
+      "footerCallback": function (row, data, start, end, display) {
+        var api = this.api(), data;
+ 
+        // Remove the formatting to get integer data for summation
+        var intVal = function ( i ) {
+            return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                    i : 0;
+        };
+
+        // Total over all pages
+        total = api
+            .column( 6 )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( 6, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( 6 ).footer() ).html(
+            ''+pageTotal.toLocaleString() +' ( '+ total.toLocaleString() +' total)'
+        );
+
+        // Total over all pages
+        total = api
+            .column( 5 )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( 5, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( 5 ).footer() ).html(
+            pageTotal +' ( '+ total +' total)'
+        );
+      }
+    });
   </script>
 
 </body>

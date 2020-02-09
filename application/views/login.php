@@ -29,9 +29,25 @@
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="<?php echo $vendorDirectory ?>css/util.css">
   <link rel="stylesheet" type="text/css" href="<?php echo $vendorDirectory ?>css/main.css">
+  <style>
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+      background-color: white;
+      color: black;
+    }
+  </style>
 <!--===============================================================================================-->
 </head>
 <body>
+  <div class="fixed-header">
+    <div style="width:100%;padding-left:10px;">
+      <div style="width:15%;float:left;">Rumahku.com</div>
+      <div style="width:85%;float:left;margin:auto;"><p style="font-size:12px;">Rancang Bangun Sistem Penjualan Alat-Alat Rumah Tangga</p></div>
+    </div>
+  </div>
   <div class="limiter">
     <div class="container-login100" style="background-image: url('<?php echo $vendorDirectory ?>images/bg-01.jpg');">
       <div class="wrap-login100 p-t-30 p-b-50">
