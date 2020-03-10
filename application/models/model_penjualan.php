@@ -66,7 +66,7 @@ function updatenota(){
 }
 
 function penjualan_header($nota){
-      $myquery="SELECT penjualan_header.nomor_faktur,penjualan_header.tanggal,penjualan_header.id_user,penjualan_header.grand_total,penjualan_header.bayar,penjualan_header.keterangan,pelanggan.nama_pelanggan,pelanggan.alamat from penjualan_header INNER JOIN pelanggan on penjualan_header.id_pelanggan=pelanggan.id_pelanggan where nomor_faktur='$nota'";
+      $myquery="SELECT penjualan_header.nomor_faktur,penjualan_header.tanggal,penjualan_header.id_user,penjualan_header.grand_total,penjualan_header.bayar,penjualan_header.keterangan,pelanggan.nama_pelanggan,pelanggan.alamat,penjualan_header.potongan_harga,penjualan_header.ongkos_kirim,penjualan_header.pembulatan from penjualan_header INNER JOIN pelanggan on penjualan_header.id_pelanggan=pelanggan.id_pelanggan where nomor_faktur='$nota'";
       $kasus=$this->db->query($myquery)->row();
       return $kasus;
 }

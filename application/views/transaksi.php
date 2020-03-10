@@ -356,15 +356,51 @@
             <div class='col-sm-5'>
               <div class="form-horizontal">
                 <div class="form-group">
-                  <label class="col-sm-6 control-label">Bayar</label>
+                  <label class="col-sm-6 control-label">Harga Jual</label>
                   <div class="col-sm-6">
-                    <input type='text' name='cash' id='UangCash' class='form-control' style='width:200%;' onkeypress='return check_int(event)'>
+                    <input type='text' name='hargaJual' id='HargaJual' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-6 control-label">Kembali</label>
+                  <label class="col-sm-6 control-label">Potongan Harga</label>
                   <div class="col-sm-6">
-                    <input type='text' id='UangKembali' class='form-control' style='width:200%;' disabled>
+                    <input type='number' name='potonganHarga' id='potonganHarga' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Subtotal</label>
+                  <div class="col-sm-6">
+                    <input type='text' name='subtotalFixed' id='subtotalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Ongkos Kirim</label>
+                  <div class="col-sm-6">
+                    <input type='number' name='ongkosKirimFixed' id='ongkosKirimFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Pembulatan</label>
+                  <div class="col-sm-6">
+                    <input type='number' name='pembulatanFixed' id='pembulatanFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Total</label>
+                  <div class="col-sm-6">
+                    <input type='text' name='totalFixed' id='totalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Bayar</label>
+                  <div class="col-sm-6">
+                    <input type='number' name='cash' id='UangCash' class='form-control' style='width:200%;' value="0" min="0" onchange="HitungTotalBayar();">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Sisa Pembayaran</label>
+                  <div class="col-sm-6">
+                    <input type='text' id='UangKembali' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
                   </div>
                 </div>
                 <div class="form-group">
@@ -606,7 +642,8 @@ $(document).on('keyup', '#jumlah_beli', function(){
 });
 
 $(document).on('keyup', '#UangCash', function(){
-  HitungTotalKembalian();
+  // HitungTotalKembalian();
+  // HitungTotalBayar();
 });
 
 
@@ -621,11 +658,27 @@ function HitungTotalBayar()
     }
   });
 
+  var potonganHarga = parseInt($("#potonganHarga").val());
   $('#TotalBayar').html('Rp. '+to_rupiah(Total));
+  $('#HargaJual').val('Rp. '+to_rupiah(Total));
   $('#TotalBayarHidden').val(Total);
+  var subtotal = Total - potonganHarga;
+  
+  $("#subtotalFixed").val('Rp.' + to_rupiah(subtotal));
 
-  $('#UangCash').val('');
-  $('#UangKembali').val('');
+  var ongkir = parseInt($("#ongkosKirimFixed").val());
+  var pembulatan = parseInt($("#pembulatanFixed").val());
+
+  var totalFixed = subtotal + ongkir + pembulatan;
+
+  var uangCash = $("#UangCash").val();
+  totalFixed -= uangCash;
+  
+  $('#UangKembali').val('Rp. '+to_rupiah(totalFixed));
+  $('#totalFixed').val('Rp. '+to_rupiah(totalFixed));
+  $('#TotalBayar').html('Rp. '+to_rupiah(totalFixed));
+  $('#TotalBayarHidden').val(totalFixed);
+
 }
 
 

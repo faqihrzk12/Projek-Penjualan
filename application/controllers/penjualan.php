@@ -65,6 +65,7 @@ function simpandulu()
 		redirect(base_url().'penjualan');
 		exit;
 	}
+
 	// cek stock ----
 	$stok=$this->model_penjualan->cek_stock($kode_barang);
 	if ($stok->total_stock<=$jumlah_beli) {
@@ -72,7 +73,8 @@ function simpandulu()
 		$this->session->set_userdata('pesan',$psn);
 		redirect(base_url().'penjualan');
 		exit;	
-	} 
+	}
+
 	// cek status simpan
 	if ($this->session->simpan==0) {
 		//---data pertama kali simpan
@@ -83,6 +85,9 @@ function simpandulu()
 			'id_pelanggan'=>$id_pelanggan,
 			'grand_total'=>$this->input->post('totalbayar'),
 			'bayar'=>$this->input->post('cash'),
+			'potongan_harga' => $this->input->post('potonganHarga'),
+			'ongkos_kirim' => $this->input->post('ongkosKirimFixed'),
+			'pembulatan' => $this->input->post('pembulatanFixed'),
 			'id_user'=>$this->input->post('kasirid'),
 			'keterangan'=>$this->input->post('catatan'));
 		//simpan ke tabel penjuala header
@@ -107,8 +112,12 @@ function simpandulu()
 			'id_pelanggan'=>$id_pelanggan,
 			'grand_total'=>$this->input->post('totalbayar'),
 			'bayar'=>$this->input->post('cash'),
+			'potongan_harga' => $this->input->post('potonganHarga'),
+			'ongkos_kirim' => $this->input->post('ongkosKirimFixed'),
+			'pembulatan' => $this->input->post('pembulatanFixed'),
 			'id_user'=>$this->input->post('kasirid'),
 			'keterangan'=>$this->input->post('catatan'));
+		
 		$where=array('nomor_faktur'=>$nota);
 		$this->mymodel->Update('penjualan_header',$data,$where);
 		
@@ -258,6 +267,7 @@ public function cetak_transaksi()
 		//$pdf->Ln();
 		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
 		
+		$totalGross = 0;
 		foreach ($datadetil as $row)  {
 			$pdf->Ln();
 			$pdf->Cell(25, 5, $row->kode_barang, 1, 0, 'L');
@@ -265,16 +275,53 @@ public function cetak_transaksi()
 			$pdf->Cell(25, 5, number_format($row->harga_satuan,0), 1, 0, 'R');
 			$pdf->Cell(15, 5, $row->jumlah_beli, 1, 0, 'R');
 			$pdf->Cell(25, 5, number_format($row->total,0), 1,0,'R');
+			$totalGross += $row->total;
 		}
 		//$pdf->Ln();
 		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
 		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Harga Jual', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($totalGross,0), 1,0,'R');
+		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Potongan Harga', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($dataheader->potongan_harga,0), 1,0,'R');
+		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Subtotal', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga,0), 1,0,'R');
+		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Ongkos Kirim', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($dataheader->ongkos_kirim,0), 1,0,'R');
+		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Pembulatan', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($dataheader->pembulatan,0), 1,0,'R');
+		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Total', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($dataheader->grand_total,0), 1,0,'R');
+		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga + $dataheader->ongkos_kirim + $dataheader->pembulatan,0), 1,0,'R');
 		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Bayar', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($dataheader->bayar,0), 1,0,'R');
+		$pdf->Ln();
+		$pdf->Cell(105, 5, 'Sisa Pembayaran', 1, 0, 'R');
+		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga + $dataheader->ongkos_kirim + $dataheader->pembulatan - $dataheader->bayar,0), 1,0,'R');
 		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
+		$pdf->SetFont('Arial','B',6);
 		$pdf->Ln();
-		
+		$pdf->Cell(30, 5, 'Perhatian', 'L', 0, 'R');
+		$pdf->Cell(100, 5, '- REK. BCA 001-770-9138 A/N PT. RUMAH MAHARDIKA KARSYA', 'R', 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(30, 5, '', 'L', 0, 'R');
+		$pdf->Cell(100, 5, '- REK. MANDIRI 115-000-333-9977 A/N PT. RUMAH MAHARDIKA KARSYA', 'R', 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(30, 5, '', 'L', 0, 'R');
+		$pdf->Cell(100, 5, '- Barang-barang yang sudah dibeli tidak dapat ditukar/dikembalikan', 'R', 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(30, 5, '', 'L', 0, 'R');
+		$pdf->Cell(100, 5, '- Kami tidak bertanggung jawab atas ketersediaan/kondisi barang jika barang tidak', 'R', 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(30, 5, '', 'L,B', 0, 'R');
+		$pdf->Cell(100, 5, ' diambil dalam jangka waktu 30 hari', 'R,B', 0, 'L');
+		$pdf->Ln();
+		$pdf->Ln();
 		$pdf->Cell(130, 5, "Terimakasih telah berbelanja dengan kami", 0, 0, 'C');
 
 		$pdf->Output();
