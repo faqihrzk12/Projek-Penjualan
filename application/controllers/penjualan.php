@@ -60,6 +60,7 @@ function simpandulu()
 	$this->form_validation->set_rules('kode_barang','<b><i>Kode Barang</i></b>','required');
 	$this->form_validation->set_rules('id_pelanggan','<b><i>Pelanggan</i></b>','required');
 	//--cek validasi data--
+
 	if ($this->form_validation->run() == FALSE ) { 
 		$this->session->set_userdata('pesan','Data belum lengkap, '.validation_errors());
 		redirect(base_url().'penjualan');
@@ -281,28 +282,33 @@ public function cetak_transaksi()
 		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Harga Jual', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($totalGross,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($totalGross,0), 1,0,'R');
 		$pdf->Ln();
+		$pdf->Cell(105, 5, 'PPn', 1, 0, 'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($totalGross * 10 / 100,0), 1,0,'R');
+		$pdf->Ln();
+		$subtotal = $totalGross + ($totalGross * 10 / 100);
 		$pdf->Cell(105, 5, 'Potongan Harga', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($dataheader->potongan_harga,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($dataheader->potongan_harga,0).'%', 1,0,'R');
 		$pdf->Ln();
+		$subtotal = $subtotal - ($dataheader->potongan_harga * $subtotal / 100);
 		$pdf->Cell(105, 5, 'Subtotal', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp.' .number_format($subtotal,0), 1,0,'R');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Ongkos Kirim', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($dataheader->ongkos_kirim,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($dataheader->ongkos_kirim,0), 1,0,'R');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Pembulatan', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($dataheader->pembulatan,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($dataheader->pembulatan,0), 1,0,'R');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Total', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga + $dataheader->ongkos_kirim + $dataheader->pembulatan,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($subtotal + $dataheader->ongkos_kirim + $dataheader->pembulatan,0), 1,0,'R');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Bayar', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($dataheader->bayar,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp .'.number_format($dataheader->bayar,0), 1,0,'R');
 		$pdf->Ln();
 		$pdf->Cell(105, 5, 'Sisa Pembayaran', 1, 0, 'R');
-		$pdf->Cell(25, 5, number_format($totalGross - $dataheader->potongan_harga + $dataheader->ongkos_kirim + $dataheader->pembulatan - $dataheader->bayar,0), 1,0,'R');
+		$pdf->Cell(25, 5, 'Rp. '.number_format($subtotal + $dataheader->ongkos_kirim + $dataheader->pembulatan - $dataheader->bayar,0), 1,0,'R');
 		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
 		$pdf->SetFont('Arial','B',6);
 		$pdf->Ln();

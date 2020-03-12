@@ -67,10 +67,10 @@
           </div>
 
           <?php
-            if (isset($pesan)) {
-              echo '<div class="container-login100-form-btn m-t-32">';
-              echo $pesan;
-              echo '<div>';
+            if ($this->session->flashdata('msg') !== null) {
+              echo '<div style="color:red;text-align: center;"><b>';
+              echo $this->session->flashdata('msg');
+              echo '</b><div>';
             }
           ?>
 

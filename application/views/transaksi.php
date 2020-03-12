@@ -362,9 +362,15 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-6 control-label">Potongan Harga</label>
+                  <label class="col-sm-6 control-label">PPn</label>
                   <div class="col-sm-6">
-                    <input type='number' name='potonganHarga' id='potonganHarga' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+                    <input type='text' name='ppn' id='ppn' value ="Rp. <?php echo number_format($total * 10/100,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">Potongan Harga (%)</label>
+                  <div class="col-sm-6">
+                    <input type='number' name='potonganHarga' id='potonganHarga' value ="0" class='form-control' style='width:200%;' min="0" max="100" onchange="HitungTotalBayar()">
                   </div>
                 </div>
                 <div class="form-group">
@@ -376,7 +382,15 @@
                 <div class="form-group">
                   <label class="col-sm-6 control-label">Ongkos Kirim</label>
                   <div class="col-sm-6">
-                    <input type='number' name='ongkosKirimFixed' id='ongkosKirimFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+                    <select name="ongkosKirimFixed" id="ongkosKirimFixed" class="form-control" style="width:200%;" onchange="HitungTotalBayar()">
+                      <option value="15000" selected>DKI JAKARTA - Rp. 15.000 </option>
+                      <option value="20000">DEPOK - Rp. 20.000 </option>
+                      <option value="16000">TANGERANG - Rp. 16.000 </option>
+                      <option value="22500">BOGOR - Rp. 22.500 </option>
+                      <option value="20000">BEKASI - Rp. 20.000 </option>
+                      <option value="35000">LUAR JABODETABEK - Rp. 35.000 </option>
+                    </select>
+                     <!-- <input type='number' name='ongkosKirimFixed' id='ongkosKirimFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()"> -->
                   </div>
                 </div>
                 <div class="form-group">
@@ -662,7 +676,9 @@ function HitungTotalBayar()
   $('#TotalBayar').html('Rp. '+to_rupiah(Total));
   $('#HargaJual').val('Rp. '+to_rupiah(Total));
   $('#TotalBayarHidden').val(Total);
-  var subtotal = Total - potonganHarga;
+  $('#ppn').val('Rp. ' + to_rupiah(Total*10/100));
+  var subtotal = Total + (Total * 10/100);
+  subtotal = subtotal - (subtotal * potonganHarga / 100);
   
   $("#subtotalFixed").val('Rp.' + to_rupiah(subtotal));
 
