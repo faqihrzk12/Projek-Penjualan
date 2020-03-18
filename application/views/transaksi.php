@@ -151,292 +151,296 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <form  action="<?php echo base_url('penjualan/simpandulu')?>" method="POST" name="formbook" enctype="multipart/form-data">
-          <div class="row">
-
-            <div class="col-lg-4">
-
-              <!-- Basic Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Informasi Nota</h6>
-                </div>
-                <div class="card-body">
-                  <div class="panel-body">
-                  <div class="form-horizontal">
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label">No. Nota</label>
-                      <div class="col-sm-8">
-                        <input type='text' name='nomor_nota' class='form-control input-sm' id='nomor_nota' value="<?php echo $this->session->nota;?>" readonly>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label">Tanggal</label>
-                      <div class="col-sm-8">
-                        <input type='date' name='tanggal' class='form-control input-sm' id='tanggal' value="<?php echo $this->session->tanggal?>">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-sm-4 control-label">Kasir Id</label>
-                      <div class="col-sm-8">
-                        <input type='text' name='kasirid' class='form-control input-sm' id='kasirid' value="<?php echo $this->session->userdata('ses_id');?>" readonly>
-                      </div>
-                    </div>
-                  </div>  
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informasi Pembeli</h6>
                   </div>
-                </div>
-              </div>
-
-              <!-- Basic Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Informasi Pembeli</h6>
-                </div>
-                <div class="card-body">
-                  <div class="panel-body">
-                    <div class="form-horizontal">
-                      <div class="form-group">
-                        <label class="col-sm-4 control-label"><b>Pembeli</b></label>
-                        <div class="col-sm-8">
-                        <select name='id_pelanggan' id='id_pelanggan' class='form-control input-sm' style='cursor: pointer;'>
-                        <option value=''>-- Umum --</option>
-                        <?php
-                        if($cmbpelanggan->num_rows() > 0)
-                        {
-                          foreach($cmbpelanggan->result() as $p)
+                  <div class="card-body">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="control-label"><b>Pembeli</b></label>
+                          <select name='id_pelanggan' id='id_pelanggan' class='form-control input-sm' style='cursor: pointer;'>
+                          <option value=''>-- Umum --</option>
+                          <?php
+                          if($cmbpelanggan->num_rows() > 0)
                           {
-                            if ($this->session->id_pelanggan==$p->id_pelanggan) { $x="selected";} else {$x="";};
-                            echo "<option value='".$p->id_pelanggan."' ".$x." >".$p->nama_pelanggan."</option>";
+                            foreach($cmbpelanggan->result() as $p)
+                            {
+                              if ($this->session->id_pelanggan==$p->id_pelanggan) { $x="selected";} else {$x="";};
+                              echo "<option value='".$p->id_pelanggan."' ".$x." >".$p->nama_pelanggan."</option>";
+                            }
                           }
-                        }
-                        ?>
-                          </select>
-                          
-                              <?php
-                          //$p=$this->session->userdata['statusform']['id_pelanggan'];  
-                          //$js = 'class="form-control input-sm" id="id_pelanggan" placeholder="tesssss"';
-                                //echo form_dropdown('id_pelanggan', $cmbpelanggan, $p,$js);
-                                  ?>                  
+                          ?>
+                            </select>
+                            
+                                <?php
+                            //$p=$this->session->userdata['statusform']['id_pelanggan'];  
+                            //$js = 'class="form-control input-sm" id="id_pelanggan" placeholder="tesssss"';
+                                  //echo form_dropdown('id_pelanggan', $cmbpelanggan, $p,$js);
+                                    ?>                  
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-4"><b>Alamat</b></div>
-                        <div class="col-sm-8">
-                          <div id='alamat'><?php echo $this->session->alamat?></div>
+                        <div class="col-md-4">
+                          <div class="col-sm-4"><b>Alamat</b></div>
+                          <div class="col-sm-8">
+                            <div id='alamat'><?php echo $this->session->alamat?></div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-4"><b>Telepon</b></div>
-                        <div class="col-sm-8">
-                          <div id='telepon'><?php echo $this->session->telepon?></div>
+                        <div class="col-md-4">
+                          <div class="col-sm-4"><b>Telepon</b></div>
+                          <div class="col-sm-8">
+                            <div id='telepon'><?php echo $this->session->telepon?></div>
+                          </div>
                         </div>
-                          
+                      </div> 
                       </div>
-                    </div>  
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informasi Pembeli</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="col-sm-4 control-label">No. Nota</label>
+                          <div class="col-sm-8">
+                            <input type='text' name='nomor_nota' class='form-control input-sm' id='nomor_nota' value="<?php echo $this->session->nota;?>" readonly>
+                          </div>              
+                        </div>
+                        <div class="col-md-4">
+                          <label class="col-sm-4 control-label">Tanggal</label>
+                          <div class="col-sm-8">
+                            <input type='date' name='tanggal' class='form-control input-sm' id='tanggal' value="<?php echo $this->session->tanggal?>">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="col-sm-4 control-label">Kasir Id</label>
+                          <div class="col-sm-8">
+                            <input type='text' name='kasirid' class='form-control input-sm' id='kasirid' value="<?php echo $this->session->userdata('ses_id');?>" readonly>
+                          </div>
+                        </div>
+                      </div> 
                     </div>
+                  </div>
                 </div>
               </div>
 
-              <?php if (isset($message_display)) { ?>
-                 <div class="alert alert-danger" role="alert" >
-                  <button type="button" class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></button>
-                  <h4><B>Pesan :</B></h4> 
-                  <?php echo $message_display;?>
-                </div>
-              <?php }?>
-            </div>
-
-            <div class="col-lg-8">
-              <h5>
-            <i class='glyphicon glyphicon-shopping-cart'></i> Penjualan > Transaksi
-          </h5>
-          
-          <table class='table table-bordered' id='TabelTransaksi'>
-            <thead>
-              <tr class="info">
-                <th style='width:35px;'>No</th>
-                <th style='width:210px;'>Kode Barang</th>
-                <th>Nama Barang</th>
-                <th style='width:120px;text-align: right;'>Harga Satuan</th>
-                <th style='width:75px;'>Qty</th>
-                <th style='width:125px;text-align: right;'>Sub Total</th>
-                <th style='width:40px;'></th>
-              </tr>
-            </thead>
-            <?php
-              $nomor = 0;
-              $total = 0;
-              //----tampilkan data detil yang sebelumnya
-                if (count($datadetil)>0) {
-              $nomor=0;
-              foreach ($datadetil as $row) {
-                $nomor++; $total=$total+$row->total;
-            ?>
-            <tbody>
-              <tr>
-                <td><?php echo $nomor?>
-                  <input type='hidden' name="id_detil" value="<?php echo $row->id_detil;?>">
-                </td>
-                <td><?php echo $row->kode_barang;?></td>
-                <td><?php echo $row->nama_barang;?></td>
-                <td style="text-align: right;"><span><?php echo number_format($row->harga_satuan,0);?></span></td>
-                <td><span><?php echo $row->jumlah_beli;?></span></td>
-                <td style="text-align:right">
-                  <input type='hidden' name="subtotal" value="<?php echo $row->total;?>"> 
-                  <span><?php echo number_format($row->total,0);?></span>
-                </td>
-                <td >
-                  <a href="javascript:;" data-id="<?php echo $row->id_detil?>" data-toggle="modal"  data-target="#modal-konfirmasi" class="btn btn-danger btn-xs" title="Hapus"><i class="fas fa-trash"></i></a>
-                </td>
-              </tr>
-            </tbody>  
-            <?php }
-
-              }
-              $nomor++;
-            ?>
-            <!--untuk input penjualan-->
-            <tbody>
-              <tr>
-                <td ><?php echo $nomor?></td>
-                <td >
-                  <select name='kode_barang' id='kode_barang' class='form-control input-sm' style='cursor: pointer;'>
-                  <option value=''>-- Pilih Kode Barang--</option>
-                  <?php
-                  if($cmbkodebrg->num_rows() > 0)
-                  {
-                    foreach($cmbkodebrg->result() as $p)
-                    {
-                      echo "<option value='".$p->kode_barang."'>".$p->kode_barang."</option>";
-                    }
-                  }
-                  ?>
-                  </select>
-
-                </td>
-                <td>
-                  <div id='nama_barang'></div>
-
-                </td>
-                <td style="text-align: right;">
-                  <input type='hidden' name="harga_barang">
-                  <span></span>
-                </td>
-                <td>
-                  <input type='text' name='jumlah_beli' class='form-control input-sm' id='jumlah_beli' onkeypress='return check_int(event)'>
-                </td>
-                <td style="text-align:right">
-                  <input type='hidden' name="subtotal">
-                  <span></span>
-                </td>
-                <td >
-                  <button type="submit" class="btn btn-success btn-xs" title="Tambah" ><i class="fas fa-plus"></i></button>
-                </td>
-              
-            </tbody>
-          </table>
-
-          <div class='alert alert-info' style="text-align: right">
-          <div class=" pull-left">  
-            <button type='button' class='btn btn-primary' id='batal'><span class="glyphicon glyphicon-remove"></span> Transaksi Batal</button>  
-
-            <button type='button' class='btn btn-primary' id='baru'><span class="glyphicon glyphicon-edit"></span> Transaksi Baru</button>
-              
-              <button type='button' class='btn btn-primary' id='cetak'><span class="glyphicon glyphicon-print"></span> Cetak Transaksi</button> 
-          </div>  
-            <h2 style="margin-top: 0px;margin-bottom: 0px">Total : <span id='TotalBayar'>Rp. <?php echo number_format($total,0);?></span></h2>
-            <input type="hidden" id='TotalBayarHidden' name="totalbayar" value="<?php echo $total;?>" >
-          
-          </div>
-          <div class='row'>
-            <div class='col-sm-7'>
-              <textarea name='catatan' id='catatan' class='form-control' rows='2' placeholder="Catatan Transaksi (Jika Ada)" style='resize: vertical; width:83%;'></textarea>
-              <br />
-               
-            </div>
-            <div class='col-sm-5'>
-              <div class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Harga Jual</label>
-                  <div class="col-sm-6">
-                    <input type='text' name='hargaJual' id='HargaJual' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+              <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Informasi Pembeli</h6>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">PPn</label>
-                  <div class="col-sm-6">
-                    <input type='text' name='ppn' id='ppn' value ="Rp. <?php echo number_format($total * 10/100,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Potongan Harga (%)</label>
-                  <div class="col-sm-6">
-                    <input type='number' name='potonganHarga' id='potonganHarga' value ="0" class='form-control' style='width:200%;' min="0" max="100" onchange="HitungTotalBayar()">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Subtotal</label>
-                  <div class="col-sm-6">
-                    <input type='text' name='subtotalFixed' id='subtotalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Ongkos Kirim</label>
-                  <div class="col-sm-6">
-                    <select name="ongkosKirimFixed" id="ongkosKirimFixed" class="form-control" style="width:200%;" onchange="HitungTotalBayar()">
-                      <option value="15000" selected>DKI JAKARTA - Rp. 15.000 </option>
-                      <option value="20000">DEPOK - Rp. 20.000 </option>
-                      <option value="16000">TANGERANG - Rp. 16.000 </option>
-                      <option value="22500">BOGOR - Rp. 22.500 </option>
-                      <option value="20000">BEKASI - Rp. 20.000 </option>
-                      <option value="35000">LUAR JABODETABEK - Rp. 35.000 </option>
-                    </select>
-                     <!-- <input type='number' name='ongkosKirimFixed' id='ongkosKirimFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()"> -->
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Pembulatan</label>
-                  <div class="col-sm-6">
-                    <input type='number' name='pembulatanFixed' id='pembulatanFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Total</label>
-                  <div class="col-sm-6">
-                    <input type='text' name='totalFixed' id='totalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Bayar</label>
-                  <div class="col-sm-6">
-                    <input type='number' name='cash' id='UangCash' class='form-control' style='width:200%;' value="0" min="0" onchange="HitungTotalBayar();">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label">Sisa Pembayaran</label>
-                  <div class="col-sm-6">
-                    <input type='text' id='UangKembali' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-6 control-label"></label>
-                  <div class="col-sm-6">
-                  <button type='submit' class='btn btn-primary' title="Simpan"><span class="glyphicon glyphicon-log-in"></span> Bayar </button>
-                </div>
+                  <div class="card-body">
+                    <div class="panel-body">
+                      
+                      <div class="col-lg-12">
+      <h5>
+    <i class='glyphicon glyphicon-shopping-cart'></i> Penjualan > Transaksi
+  </h5>
+  
+  <table class='table table-bordered' id='TabelTransaksi'>
+    <thead>
+      <tr class="info">
+        <th style='width:35px;'>No</th>
+        <th style='width:210px;'>Kode Barang</th>
+        <th>Nama Barang</th>
+        <th style='width:120px;text-align: right;'>Harga Satuan</th>
+        <th style='width:75px;'>Qty</th>
+        <th style='width:125px;text-align: right;'>Sub Total</th>
+        <th style='width:40px;'></th>
+      </tr>
+    </thead>
+    <?php
+      $nomor = 0;
+      $total = 0;
+      //----tampilkan data detil yang sebelumnya
+        if (count($datadetil)>0) {
+      $nomor=0;
+      foreach ($datadetil as $row) {
+        $nomor++; $total=$total+$row->total;
+    ?>
+    <tbody>
+      <tr>
+        <td><?php echo $nomor?>
+          <input type='hidden' name="id_detil" value="<?php echo $row->id_detil;?>">
+        </td>
+        <td><?php echo $row->kode_barang;?></td>
+        <td><?php echo $row->nama_barang;?></td>
+        <td style="text-align: right;"><span><?php echo number_format($row->harga_satuan,0);?></span></td>
+        <td><span><?php echo $row->jumlah_beli;?></span></td>
+        <td style="text-align:right">
+          <input type='hidden' name="subtotal" value="<?php echo $row->total;?>"> 
+          <span><?php echo number_format($row->total,0);?></span>
+        </td>
+        <td >
+          <a href="javascript:;" data-id="<?php echo $row->id_detil?>" data-toggle="modal"  data-target="#modal-konfirmasi" class="btn btn-danger btn-xs" title="Hapus"><i class="fas fa-trash"></i></a>
+        </td>
+      </tr>
+    </tbody>  
+    <?php }
 
-              </div>
-                <div class='row'>
-                
-                </div>
-              </div>
-            </div>
-          </div>
+      }
+      $nomor++;
+    ?>
+    <tbody>
+      <tr>
+        <td ><?php echo $nomor?></td>
+        <td >
+          <select name='kode_barang' id='kode_barang' class='form-control input-sm' style='cursor: pointer;'>
+          <option value=''>-- Pilih Kode Barang--</option>
+          <?php
+          if($cmbkodebrg->num_rows() > 0)
+          {
+            foreach($cmbkodebrg->result() as $p)
+            {
+              echo "<option value='".$p->kode_barang."'>".$p->kode_barang."</option>";
+            }
+          }
+          ?>
+          </select>
 
-          <br />
-            </div>
+        </td>
+        <td>
+          <div id='nama_barang'></div>
 
+        </td>
+        <td style="text-align: right;">
+          <input type='hidden' name="harga_barang">
+          <span></span>
+        </td>
+        <td>
+          <input type='text' name='jumlah_beli' class='form-control input-sm' id='jumlah_beli' onkeypress='return check_int(event)'>
+        </td>
+        <td style="text-align:right">
+          <input type='hidden' name="subtotal">
+          <span></span>
+        </td>
+        <td >
+          <button type="submit" class="btn btn-success btn-xs" title="Tambah" ><i class="fas fa-plus"></i></button>
+        </td>
+      
+    </tbody>
+  </table>
+
+  <div class='alert alert-info' style="text-align: right">
+  <div class=" pull-left">  
+    <button type='button' class='btn btn-primary' id='batal'><span class="glyphicon glyphicon-remove"></span> Transaksi Batal</button>  
+
+    <button type='button' class='btn btn-primary' id='baru'><span class="glyphicon glyphicon-edit"></span> Transaksi Baru</button>
+      
+      <button type='button' class='btn btn-primary' id='cetak'><span class="glyphicon glyphicon-print"></span> Cetak Transaksi</button> 
+  </div>  
+    <h2 style="margin-top: 0px;margin-bottom: 0px">Total : <span id='TotalBayar'>Rp. <?php echo number_format($total,0);?></span></h2>
+    <input type="hidden" id='TotalBayarHidden' name="totalbayar" value="<?php echo $total;?>" >
+  
+  </div>
+  <div class='row'>
+    <div class='col-sm-7'>
+      <textarea name='catatan' id='catatan' class='form-control' rows='2' placeholder="Catatan Transaksi (Jika Ada)" style='resize: vertical; width:83%;'></textarea>
+      <br />
+       <?php if (isset($message_display)) { ?>
+         <div class="alert alert-danger" role="alert" >
+          <button type="button" class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></button>
+          <h4><B>Pesan :</B></h4> 
+          <?php echo $message_display;?>
         </div>
-      </form>
+      <?php }?>
+    </div>
+    <div class='col-sm-5'>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Harga Jual</label>
+          <div class="col-sm-6">
+            <input type='text' name='hargaJual' id='HargaJual' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">PPn</label>
+          <div class="col-sm-6">
+            <input type='text' name='ppn' id='ppn' value ="Rp. <?php echo number_format($total * 10/100,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Potongan Harga (%)</label>
+          <div class="col-sm-6">
+            <input type='number' name='potonganHarga' id='potonganHarga' value ="0" class='form-control' style='width:200%;' min="0" max="100" onchange="HitungTotalBayar()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Subtotal</label>
+          <div class="col-sm-6">
+            <input type='text' name='subtotalFixed' id='subtotalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' onkeypress='return check_int(event)' disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Ongkos Kirim</label>
+          <div class="col-sm-6">
+            <select name="ongkosKirimFixed" id="ongkosKirimFixed" class="form-control" style="width:200%;" onchange="HitungTotalBayar()">
+              <option value="15000" selected>DKI JAKARTA - Rp. 15.000 </option>
+              <option value="20000">DEPOK - Rp. 20.000 </option>
+              <option value="16000">TANGERANG - Rp. 16.000 </option>
+              <option value="22500">BOGOR - Rp. 22.500 </option>
+              <option value="20000">BEKASI - Rp. 20.000 </option>
+              <option value="35000">LUAR JABODETABEK - Rp. 35.000 </option>
+            </select>
+             <!-- <input type='number' name='ongkosKirimFixed' id='ongkosKirimFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()"> -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Pembulatan</label>
+          <div class="col-sm-6">
+            <input type='number' name='pembulatanFixed' id='pembulatanFixed' value ="0" class='form-control' style='width:200%;' min="0" onchange="HitungTotalBayar()">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Total</label>
+          <div class="col-sm-6">
+            <input type='text' name='totalFixed' id='totalFixed' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Bayar</label>
+          <div class="col-sm-6">
+            <input type='number' name='cash' id='UangCash' class='form-control' style='width:200%;' value="0" min="0" onchange="HitungTotalBayar();">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label">Sisa Pembayaran</label>
+          <div class="col-sm-6">
+            <input type='text' id='UangKembali' value ="Rp. <?php echo number_format($total,0);?>" class='form-control' style='width:200%;' disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-6 control-label"></label>
+          <div class="col-sm-6">
+          <button type='submit' class='btn btn-primary' title="Simpan"><span class="glyphicon glyphicon-log-in"></span> Bayar </button>
+        </div>
+
       </div>
+        <div class='row'>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+    </div> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -671,7 +675,15 @@ function HitungTotalBayar()
       Total = parseInt(Total) + parseInt(SubTotal);
     }
   });
-
+  if ($("#potonganHarga").val() == "") {
+    $("#potonganHarga").val(0);
+  }
+  if ($("#pembulatanFixed").val() == "") {
+    $("#pembulatanFixed").val(0);
+  }
+  if ($("#UangCash").val() == "") {
+    $("#UangCash").val(0);
+  }
   var potonganHarga = parseInt($("#potonganHarga").val());
   $('#TotalBayar').html('Rp. '+to_rupiah(Total));
   $('#HargaJual').val('Rp. '+to_rupiah(Total));
