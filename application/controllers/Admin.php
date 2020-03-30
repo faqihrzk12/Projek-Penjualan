@@ -9,6 +9,7 @@ public function __construct(){
 	$this->load->library('pagination');
 	$this->load->model("mymodel");
 	$this->load->model("modeladmin");
+	$this->load->model("dashboard");
 }
 
 function index(){ 
@@ -50,6 +51,17 @@ if(!isset($this->session->userdata['masuk'])){
 	$data = array('databarang' => $hasil ,'data' => $all);
 	$this->load->view('barang',$data);
 }
+
+function dashboard() {
+	$data['total_barang'] = $this->dashboard->getTotalData('barang')->total;
+	$data['total_pelanggan'] = $this->dashboard->getTotalData('pelanggan')->total;
+	$data['total_penjualan_header'] = $this->dashboard->getTotalData('penjualan_header')->total;
+	$data['penjualan_report'] = $this->dashboard->getReportPenjualan();
+
+
+	$this->load->view('dashboard',$data);
+}
+
 
 function pelanggan(){
 

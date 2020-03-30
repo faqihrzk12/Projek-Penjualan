@@ -11,6 +11,7 @@ public function __construct(){
 	$this->load->model("mymodel");
 	$this->load->model("modeladmin");
 	$this->load->model("model_penjualan");
+	$this->load->model("cuser");
 	
 	$this->load->library('session');
 }
@@ -19,6 +20,42 @@ function index(){
 	$this->load->view('login');
 }
 
+function register() {
+	$this->load->view('register');
+}
+
+function doRegister() {
+	$username = $this->input->post('username');
+	if (strlen($username) < 3) {
+		$data['validation'] = 'Username minimal 4 karakter';
+		$this->load->view('register', $data);
+	}
+	$password = $this->input->post('password');
+	if (strlen($password) < 3) {
+		$data['validation'] = 'Password minimal 4 karakter';
+		$this->load->view('register', $data);
+	}
+	$name = $this->input->post('name');
+	$id_akses = $this->input->post('id_akses');
+
+	$args['username'] = $username;
+	$existsUsername = $this->cuser->selectWithArgs($args);
+	if (count($existsUsername) >= 1) {
+		$data['validation'] = "Username sudah terdaftar";
+		$this->load->view('register', $data);
+	}
+	$data = array(
+		'id_user' => md5(date('Y-m-d H:i:s')),
+		'username' => $username,
+		'password' => md5($password),
+		'nama' => $name,
+		'id_akses' => $id_akses
+	);
+	$newUser = $this->cuser->insert($data); 
+	$data['validation'] = "Berhasil mendaftarkan akun. Silahkan login.";
+	$this->load->view('register', $data);
+
+}
 
 
 function login(){
@@ -42,7 +79,7 @@ function login(){
 		            $this->session->set_userdata('akses','1');
 		            $this->session->set_userdata('ses_id',$data['id_user']);
 		            $this->session->set_userdata('ses_nama',$data['nama']);
-		            redirect('admin');
+		            redirect(base_url('admin/dashboard'));
 
 		         }else { //akses kasir
 		         	 if($data['id_akses']=='2'){
@@ -81,7 +118,7 @@ function log (){
 				$sesi=array('username'=>$userid,'useraktif'=>'admin');
 				$this->session->set_userdata('userlogin',$sesi);
 				$this->load->view('admin/nav_admin',$sesi);
-				redirect(base_url('admin/index'));
+				redirect(base_url('admin/dashboard'));
 			}
 		}
 }

@@ -340,17 +340,19 @@ public function cetak()
 {
     $tglawal=$this->session->userdata('awal');
 	$tglakhir=$this->session->userdata('akir');
+	
 
 	$data=$this->model_penjualan->laporan_penjualan_pertgl($tglawal,$tglakhir);
 	$tglawal=$this->mylibrary->format_tanggal($tglawal);
 	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
+
 	if(count($data)==0) {
 		$this->session->set_userdata('pesan','Belum ada data');
 		redirect(base_url().'penjualan/lp');
 		exit;
 	}
 
-	$this->load->library('fpdf');		
+	$this->load->library('fpdf');
 		$pdf = new FPDF('P','mm','A5');
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','',9);
@@ -531,10 +533,10 @@ public function preview_laporan_perbrg()
 	$this->load->view('penjualan/laporanbarang',$data);
 }
 public function preview_laporan()
-
 {
 	$tglawal=$this->input->post('tglawal');
 	$tglakhir=$this->input->post('tglakhir');
+
 	$this->session->set_userdata("awal",$tglawal);
     $this->session->set_userdata("akir",$tglakhir);
 	$this->session->set_userdata("muncul",TRUE);
@@ -544,6 +546,7 @@ public function preview_laporan()
 
 	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
 	$data=array('laporan'=>$a,'tglawal'=>$tglawal,'tglakhir'=>$tglakhir);
+	
 	$this->load->view('penjualan/laporan',$data);
 }
 

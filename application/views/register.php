@@ -52,9 +52,9 @@
     <div class="container-login100" style="background-image: url('<?php echo $vendorDirectory ?>images/bg-01.jpg');">
       <div class="wrap-login100 p-t-30 p-b-50">
         <span class="login100-form-title p-b-41">
-          Account Login
+          Account Register
         </span>
-        <form class="login100-form validate-form p-b-33 p-t-5" action="<?php echo base_url('sigin/login')?> " method="post">
+        <form class="login100-form validate-form p-b-33 p-t-5" action="<?php echo base_url('sigin/doRegister')?> " method="post">
 
           <div class="wrap-input100 validate-input" data-validate = "Enter username">
             <input class="input100" type="text" name="username" placeholder="User name">
@@ -65,11 +65,23 @@
             <input class="input100" type="password" name="password" placeholder="Password">
             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
           </div>
+          
+          <div class="wrap-input100 validate-input" data-validate = "Enter name">
+            <input class="input100" type="text" name="name" placeholder="Name">
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+          </div>
+
+          <div class="wrap-input100">
+            <select class="input100" name="id_akses">
+              <option value="1">Admin</option>
+              <option value="2" selected>Kasir</option>
+            </select>
+          </div>
 
           <?php
-            if ($this->session->flashdata('msg') !== null) {
+            if (isset($validation)) {
               echo '<div style="color:red;text-align: center;"><b>';
-              echo $this->session->flashdata('msg');
+              echo $validation;
               echo '</b><div>';
             }
           ?>
@@ -77,11 +89,11 @@
 
           <div class="container-login100-form-btn m-t-32">
             <button class="login100-form-btn">
-              Login
+              Register
             </button>
           </div>
           <p style="text-align: center;margin-top: 20px;">
-            Don't have an account? <a href="register" style="color: blue;">Register</a> here.
+            Already have an account? <a href="login" style="color: blue;">Login</a> here.
           </p>
         </form>
       </div>
