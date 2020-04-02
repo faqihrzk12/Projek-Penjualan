@@ -160,6 +160,23 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+          <?php 
+            if ($this->session->flashdata('login') == true) {
+          ?>
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                  Login Berhasil
+                  <div class="text-white-50 small"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+            }
+          ?>
+
           <div class="row">
             <div class="col-xl-4 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">

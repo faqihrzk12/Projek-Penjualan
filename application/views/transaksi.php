@@ -151,6 +151,22 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <form  action="<?php echo base_url('penjualan/simpandulu')?>" method="POST" name="formbook" enctype="multipart/form-data">
+            <?php 
+            if ($this->session->flashdata('login') == true) {
+            ?>
+              <div class="row">
+                <div class="col-lg-12 mb-4">
+                  <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                      Login Berhasil
+                      <div class="text-white-50 small"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php
+              }
+            ?>
             <div class="row">
               <div class="col-lg-12">
                 <div class="card shadow mb-4">

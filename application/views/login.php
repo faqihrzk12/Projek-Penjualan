@@ -72,6 +72,11 @@
               echo $this->session->flashdata('msg');
               echo '</b><div>';
             }
+            if ($this->session->flashdata('logout') == true) {
+              echo '<div style="color:red;text-align: center;"><b>';
+              echo 'Berhasil logout';
+              echo '</b><div>';
+            }
           ?>
 
 

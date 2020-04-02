@@ -160,7 +160,50 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
+          <?php 
+            if ($this->session->flashdata('insert') == true) {
+          ?>
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                  Data berhasil ditambah
+                  <div class="text-white-50 small"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php
+            } 
+            if ($this->session->flashdata('update') == true) {
+          ?>
+            <div class="row">
+              <div class="col-lg-12 mb-4">
+                <div class="card bg-primary text-white shadow">
+                  <div class="card-body">
+                    Data berhasil diupdate
+                    <div class="text-white-50 small"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+            }
+            if ($this->session->flashdata('delete') == true) {
+          ?>
+              <div class="row">
+                <div class="col-lg-12 mb-4">
+                  <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                      Data berhasil dihapus
+                      <div class="text-white-50 small"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <?php
+            }
+          ?>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">

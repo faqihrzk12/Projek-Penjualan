@@ -79,6 +79,7 @@ function login(){
 		            $this->session->set_userdata('akses','1');
 		            $this->session->set_userdata('ses_id',$data['id_user']);
 		            $this->session->set_userdata('ses_nama',$data['nama']);
+		            $this->session->set_flashdata('login', true);
 		            redirect(base_url('admin/dashboard'));
 
 		         }else { //akses kasir
@@ -86,6 +87,7 @@ function login(){
 		            $this->session->set_userdata('akses','2');
 					$this->session->set_userdata('ses_id',$data['id_user']);
 		            $this->session->set_userdata('ses_nama',$data['nama']);
+		            $this->session->set_flashdata('login', true);
 		            redirect('penjualan');
 		         }}
 
@@ -125,9 +127,15 @@ function log (){
 
 function logout(){
 	  $this->session->sess_destroy();  
+
+		redirect(base_url('Sigin/exit'));
+
+
+}
+
+function exit () {
+	$this->session->set_flashdata('logout', true);
 	redirect(base_url('Sigin/index'));
-
-
 }
 }
 ?>

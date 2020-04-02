@@ -234,6 +234,7 @@ $data=array('kode_barang'=>$kode,
 
 //menyimpan ke database
 $this->mymodel->insert('barang',$data);
+$this->session->set_flashdata('insert', true);
 $a=base_url('admin/index');
 redirect($a);
 }
@@ -285,6 +286,7 @@ $data=array('id_pelanggan'=>$kode,
 //menyimpan ke database
 
 $this->mymodel->insert('pelanggan',$data);
+$this->session->set_flashdata('insert', true);
 $a=base_url('admin/pelanggan');
 redirect($a);
 }
@@ -372,6 +374,7 @@ $data=array(
 $where=array('kode_barang'=>$kode);
 
 $this->mymodel->update('barang',$data,$where);
+$this->session->set_flashdata('update', true);
 $a=base_url('admin/index');
 redirect($a);
 	}
@@ -386,6 +389,7 @@ function deletebarang($kode)
 {
 	$id=array('kode_barang'=>$kode);
 	$this->mymodel->delete('barang',$id);
+	$this->session->set_flashdata('delete', true);
 	redirect(base_url('admin/index'));
 }
 
@@ -451,6 +455,7 @@ $data=array(
 $where=array('id_pelanggan'=>$kode);
 
 $this->mymodel->update('pelanggan',$data,$where);
+$this->session->set_userdata('update', true);
 $a=base_url('admin/pelanggan');
 redirect($a);
 	}
@@ -460,6 +465,7 @@ function deletepembeli($kode)
 {
 	$id=array('id_pelanggan'=>$kode);
 	$this->mymodel->delete('pelanggan',$id);
+	$this->session->set_userdata('delete', true);
 	redirect(base_url('admin/pelanggan'));
 }
 
