@@ -166,7 +166,12 @@
           <div class="row">
             <div class="col-lg-12 mb-4">
               <div class="card bg-success text-white shadow">
-                <div class="card-body">
+                <span style="text-align: right;padding-right: 8px;">
+                  <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </span>
+                <div class="card-body" style="padding-top: 0px;">
                   Data berhasil ditambah
                   <div class="text-white-50 small"></div>
                 </div>
@@ -180,7 +185,12 @@
             <div class="row">
               <div class="col-lg-12 mb-4">
                 <div class="card bg-primary text-white shadow">
-                  <div class="card-body">
+                  <span style="text-align: right;padding-right: 8px;">
+                    <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </span>
+                  <div class="card-body" style="padding-top: 0px;">
                     Data berhasil diupdate
                     <div class="text-white-50 small"></div>
                   </div>
@@ -194,7 +204,12 @@
               <div class="row">
                 <div class="col-lg-12 mb-4">
                   <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
+                    <span style="text-align: right;padding-right: 8px;">
+                      <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </span>
+                    <div class="card-body" style="padding-top: 0px;">
                       Data berhasil dihapus
                       <div class="text-white-50 small"></div>
                     </div>

@@ -270,7 +270,7 @@ function savepembeli(){
 $where=array('id_pelanggan'=>$kode);
 $cari=$this->mymodel->getwhere('pelanggan',$where);
 
-if(count($cari)>0){
+if(!empty($cari)){
 
 	
     $data=array('pesan'=>'data kode tidak boleh sama');
@@ -455,7 +455,7 @@ $data=array(
 $where=array('id_pelanggan'=>$kode);
 
 $this->mymodel->update('pelanggan',$data,$where);
-$this->session->set_userdata('update', true);
+$this->session->set_flashdata('update', true);
 $a=base_url('admin/pelanggan');
 redirect($a);
 	}
@@ -465,7 +465,7 @@ function deletepembeli($kode)
 {
 	$id=array('id_pelanggan'=>$kode);
 	$this->mymodel->delete('pelanggan',$id);
-	$this->session->set_userdata('delete', true);
+	$this->session->set_flashdata('delete', true);
 	redirect(base_url('admin/pelanggan'));
 }
 
