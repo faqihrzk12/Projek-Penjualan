@@ -221,7 +221,7 @@
                   </thead>
                   <?php
                   $n=0;
-                  foreach ($datauser as $row ) {
+                  foreach ($data as $row ) {
                     $n++;?>
 
                     <tbody>
@@ -241,9 +241,7 @@
                     </tbody>
                   <?php } ?>
                 </table>
-                <?php
-                  echo $this->pagination->create_links();
-                ?>
+                
               </div>
             </div>
           </div>
@@ -314,6 +312,7 @@
         "paging": false,
         "searching": false,
         "bInfo": false
+        "pageLength": 3,
       } );
   </script>
 

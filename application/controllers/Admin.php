@@ -128,8 +128,8 @@ function user(){
 	$this->pagination->initialize($config);
 	$from=$this->uri->segment(3);
 	$hasil=$this->mymodel->paging('cuser',$config['per_page'],$from);
-
-	$data = array('datauser' => $hasil );
+	$all = $this->mymodel->semuadata('cuser');
+	$data = array('datauser' => $hasil, 'data' => $all );
 	$this->load->view('user',$data);
 }
 
