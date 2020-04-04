@@ -169,6 +169,16 @@
                   <h6 class="m-0 font-weight-bold text-primary">Tambah Barang</h6>
                 </div>
                 <div class="card-body">
+                  <?php if (isset($pesan)) {?>
+
+                  <div class='alert alert-danger' role='alert'>
+                    <button type="button" class="close" data-dismiss='alert'>x</button>
+                    <h4>peringatan</h4>
+
+                    <?php echo $pesan;?>
+                  </div> 
+                  
+                  <?php } ?>
                   <form class="form-horizontal" action="<?php echo base_url('admin/savebarang')?>" method="post" name="form">
                     <div class="form-group">
                       <label class="col-sm-2 control-label" > Kode Barang</label>

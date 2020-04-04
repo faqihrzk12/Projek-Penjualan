@@ -200,8 +200,8 @@ function savebarang(){
 
 	if ($this->form_validation->run() == FALSE ) {
 
-	
-    $data=array('pesan'=>validation_errors());
+	$merk=$this->modeladmin->combomerk();
+    $data=array('pesan'=>validation_errors(), 'merk' => $merk);
 	$this->load->view('tambahbarang',$data);
 		
 	}else{
@@ -218,10 +218,10 @@ function savebarang(){
 $where=array('kode_barang'=>$kode);
 $cari=$this->mymodel->getwhere('barang',$where);
 
-if(count($cari)>0){
+if(!empty($cari)){
 
-	
-    $data=array('pesan'=>'data kode tidak boleh sama');
+	$merk=$this->modeladmin->combomerk();
+    $data=array('pesan'=>'data kode tidak boleh sama', 'merk' => $merk);
 	$this->load->view('tambahbarang',$data);
 
 }else{
