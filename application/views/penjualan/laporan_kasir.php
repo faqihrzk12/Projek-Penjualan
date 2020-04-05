@@ -4,8 +4,8 @@
 <head>
   <?php $vendorDirectory = base_url('/mcvendor/admin/') ?>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="../images/logo1.jpg">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -25,7 +25,6 @@
 </head>
 
 <body id="page-top">
-
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -45,9 +44,9 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url('admin/dashboard')?>">
+        <a class="nav-link" href="<?php echo base_url('Penjualan');?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Transaksi</span></a>
       </li>
 
       <!-- Divider -->
@@ -58,21 +57,6 @@
         Interface
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Master</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?php echo base_url('admin/index'); ?>">Barang</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/pelanggan'); ?>">Pembeli</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/user'); ?>">User</a>
-          </div>
-        </div>
-      </li>
-
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -81,8 +65,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?php echo base_url('Penjualan/lp'); ?>">Data Transaksi per Tanggal</a>
-            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpbr'); ?>">Data Transaksi per Barang</a>
+            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpkasir'); ?>">Data Transaksi per Tanggal</a>
+            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpbrkasir'); ?>">Data Transaksi per Barang</a>
           </div>
         </div>
       </li>
@@ -159,108 +143,113 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <?php 
-            if ($this->session->flashdata('insert') == true) {
-          ?>
           <div class="row">
-            <div class="col-lg-12 mb-4">
-              <div class="card bg-success text-white shadow">
-                <span style="text-align: right;padding-right: 8px;">
-                  <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </span>
-                <div class="card-body" style="padding-top: 0px;">
-                  Data berhasil ditambah
-                  <div class="text-white-50 small"></div>
+
+            <div class="col-lg-4">
+
+              <!-- Basic Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Informasi Laporan</h6>
+                </div>
+                <div class="card-body">
+                  <form action="<?php echo base_url('penjualan/preview_laporan_kasir')?>" method="POST" name="formbook" enctype="multypart/form-data">
+                    <div class="form-horizontal">
+            
+                      <div class="form-group">
+                          <label class="col-sm-12 control-label"> Dari Tanggal </label>
+                          <div class="col-sm-12">
+                          <input type="date" name="tglawal" class="form-control"  placeholder="dari tanggal"
+                          value="<?php echo date('Y-m-d')?>">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="col-sm-12 control-label"> Sampai Tanggal </label>
+                          <div class="col-sm-12">
+                          <input type="date" name="tglakhir" class="form-control"   placeholder="sampai tanggal" >
+                        </div>
+                      </div>
+
+                       
+
+                      <div class="form-group col-sm-4">
+                      <button type="submit" class=" btn btn-danger" > Preview </button>
+                      </div>
+                   </div>
+                 </form>
                 </div>
               </div>
+
             </div>
-          </div>
-          <?php
-            } 
-            if ($this->session->flashdata('update') == true) {
-          ?>
-            <div class="row">
-              <div class="col-lg-12 mb-4">
-                <div class="card bg-primary text-white shadow">
-                  <span style="text-align: right;padding-right: 8px;">
-                    <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </span>
-                  <div class="card-body" style="padding-top: 0px;">
-                    Data berhasil diupdate
-                    <div class="text-white-50 small"></div>
+
+            <div class="col-lg-8">
+
+              <!-- Basic Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Laporan</h6>
+                </div>
+                <div class="card-body">
+                  <?php 
+                    if ($this->session->muncul == TRUE) {
+                  ?>
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th style="width:35px">#</th>
+                            <th style="width:200px">Tanggal</th>
+                            <th style="width:210px">Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th style="width: 120px;text-align: left;">Harga Satuan</th>
+                            <th style="width: 75px">Qty</th>
+                            <th style="width: 125px;text-align: left;" > Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                          $n = 1; 
+                          foreach ($laporan as $row) {
+                        ?>
+                            <tr>
+                              <td><?php echo $n;?></td>
+                              <td><?php echo $row->tanggal;?></td>
+                              <td><?php echo $row->kode_barang;?></td>
+                              <td><?php echo $row->nama_barang;?></td>
+                              <td><?php echo $row->harga_satuan;?></td>
+                              <td><?php echo $row->jumlah_beli;?></td>
+                              <td><?php echo number_format($row->total,0);?></td>
+                            </tr>
+                      <?php
+                            $n++;
+                          }
+                        ?>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
+                    </table>
                   </div>
-                </div>
-              </div>
-            </div>
-          <?php
-            }
-            if ($this->session->flashdata('delete') == true) {
-          ?>
-              <div class="row">
-                <div class="col-lg-12 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <span style="text-align: right;padding-right: 8px;">
-                      <button onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </span>
-                    <div class="card-body" style="padding-top: 0px;">
-                      Data berhasil dihapus
-                      <div class="text-white-50 small"></div>
-                    </div>
+                  <div class='col-sm-2'>
+                    <a class="btn btn-danger btn-block" href="<?php echo base_url('penjualan/cetakkasir')?>" role='button' data-toggle='tooltip'><span class="glyphicon glyphicon-print "></span> Print Pdf</a>
                   </div>
-                </div>
-              </div>
-          <?php
-            }
-          ?>
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Daftar Pembeli</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Kode Pembeli</th>
-                      <th>Nama Pembeli</th>
-                      <th>Alat Pembeli</th>
-                      <th>No. Handphone</th>
-                      <th><button> <a href="<?php echo base_url('admin/tambahpembeli')?>"> <span class="glyphicon glyphicon-plus" ></span> <b>+</b> New </a></button></th>
-                    </tr>
-                  </thead>
-                  <tbody>
                   <?php
-                  $n=0;
-                  foreach ($data as $row ) {
-                    $n++;?>
-                    <tr>
-                      <td><?php echo $n;?></td>
-                      <td><?php echo $row->id_pelanggan;?></td>
-                      <td><?php echo $row->nama_pelanggan;?></td>
-                      <td><?php echo $row->alamat;?></td>
-                      <td><?php echo $row->telepon;?></td>
-                      <td><a class="btn btn-info" href="<?php echo base_url('admin/editpembeli/').$row->id_pelanggan ?>" title='edit'> <i class="fas fa-edit"></i> Edit </a> 
-
-
-                          <a class="btn btn-danger" href="<?php echo base_url('admin/deletepembeli/').$row->id_pelanggan ?>" title="delete"
-                          onclick='return confirm("benar data barang akan dihapus ?");'>  
-                          <i class="fas fa-edit"></i> Delete</a>
-                      </td>
-                    </tr>
-
-                  <?php } ?>
-                  </tbody>
-                </table>
+                    } 
+                  ?>
+                </div>
               </div>
+
             </div>
+
           </div>
 
         </div>
@@ -325,7 +314,60 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-      } );
+      "footerCallback": function (row, data, start, end, display) {
+        var api = this.api(), data;
+ 
+        // Remove the formatting to get integer data for summation
+        var intVal = function ( i ) {
+            return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                    i : 0;
+        };
+
+        // Total over all pages
+        total = api
+            .column( 6 )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( 6, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( 6 ).footer() ).html(
+            ''+pageTotal.toLocaleString() +' ( '+ total.toLocaleString() +' total)'
+        );
+
+        // Total over all pages
+        total = api
+            .column( 5 )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( 5, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( 5 ).footer() ).html(
+            pageTotal +' ( '+ total +' total)'
+        );
+      }
+    });
   </script>
 
 </body>

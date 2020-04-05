@@ -72,8 +72,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?php echo base_url('Penjualan/lp'); ?>">Data Transaksi per Tanggal</a>
-            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpbr'); ?>">Data Transaksi per Barang</a>
+            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpkasir'); ?>">Data Transaksi per Tanggal</a>
+            <a class="collapse-item" href="<?php echo base_url('Penjualan/lpbrkasir'); ?>">Data Transaksi per Barang</a>
           </div>
         </div>
       </li>

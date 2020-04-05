@@ -326,7 +326,6 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-        pageLength: 3
       } );
   </script>
 

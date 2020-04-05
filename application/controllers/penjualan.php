@@ -419,6 +419,89 @@ public function cetak()
 	//$this->index();.
 }
 
+public function cetakkasir()
+{
+    $tglawal=$this->session->userdata('awal');
+	$tglakhir=$this->session->userdata('akir');
+	
+
+	$data=$this->model_penjualan->laporan_penjualan_pertgl($tglawal,$tglakhir);
+	$tglawal=$this->mylibrary->format_tanggal($tglawal);
+	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
+
+	if(count($data)==0) {
+		$this->session->set_userdata('pesan','Belum ada data');
+		redirect(base_url().'penjualan/lpkasir');
+		exit;
+	}
+
+	$this->load->library('fpdf');
+		$pdf = new FPDF('P','mm','A5');
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','',9);
+		$title = 'Laporan Data Penjualan Pertanggal';
+		$pdf->SetTitle($title);
+		$pdf->SetAuthor('Faqih');
+		
+		
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Rumahku.com', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Jln. Pinangsia Raya No.42, RT.6/RW.5.', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Kec.Taman Sari,Kota Jakarta Barat', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Laporan Data Penjualan', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(20, 4, 'Tanggal', 0, 0, 'L');
+		$pdf->Cell(85, 4, ' : '.$tglawal.' Sampai '.$tglakhir, 0, 0, 'L');
+		$pdf->Ln();
+		
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		$pdf->Ln();
+		
+		$pdf->Cell(20, 5, 'Tanggal', 1, 0, 'L');
+		$pdf->Cell(25, 5, 'Kode Barang', 1, 0, 'L');
+		$pdf->Cell(40, 5, 'Nama barang', 1, 0, 'R');
+		$pdf->Cell(16, 5, 'Harga', 1, 0, 'R');
+		$pdf->Cell(10, 5, 'Qty', 1, 0, 'R');
+		$pdf->Cell(25, 5, 'Total', 1, 0, 'R');
+		//$pdf->Ln();
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		
+		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
+		    $n=0;$ttotal=0;$tqty=0;
+			foreach ($data as $row)  {
+					$n++;$ttotal=$ttotal+$row->total;
+      					$tqty=$tqty+$row->jumlah_beli;
+      				
+			$pdf->Ln();
+     		$pdf->Cell(20, 5, $row->tanggal, 1, 0, 'L');
+			$pdf->Cell(25, 5, $row->kode_barang, 1, 0, 'L');
+			$pdf->Cell(40, 5, $row->nama_barang, 1, 0, 'L');
+			$pdf->Cell(16, 5, number_format($row->harga_satuan,0), 1, 0, 'R');
+			$pdf->Cell(10, 5, $row->jumlah_beli, 1, 0, 'R');
+			$pdf->Cell(25, 5, number_format($row->total,0), 1,0,'R');
+		}
+		//$pdf->Ln();
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(101, 5, 'Total', 1, 0, 'R');
+
+		$pdf->Cell(10, 5, number_format($tqty,0), 1,0,'R');
+		$pdf->Cell(25, 5, number_format($ttotal,0), 1,0,'R');
+		$pdf->Ln();
+		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
+		$pdf->Ln();
+		
+		$pdf->Cell(130, 5, "", 0, 0, 'C');
+
+		$pdf->Output();
+	//redirect(base_url().'penjualan');
+	//$this->index();.
+}
+
 
 
 public function cetakbarang()
@@ -499,6 +582,85 @@ public function cetakbarang()
 	//redirect(base_url().'penjualan');
 	//$this->index();.
 }
+
+public function cetakbarangkasir()
+{
+    $tglawal=$this->session->userdata('awal');
+	$tglakhir=$this->session->userdata('akir');
+    $kode_barang=$this->session->userdata('barang');
+	$data=$this->model_penjualan->laporan_penjualan_perbrg($tglawal,$tglakhir,$kode_barang);
+	$tglawal=$this->mylibrary->format_tanggal($tglawal);
+	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
+	if(count($data)==0) {
+		$this->session->set_userdata('pesan','Belum ada data');
+		redirect(base_url().'penjualan/lpbrkasir');
+		exit;
+	}
+
+	$this->load->library('fpdf');		
+		$pdf = new FPDF('P','mm','A5');
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','',9);
+		$title = 'Laporan Penjualan Per Namabarang';
+		$pdf->SetTitle($title);
+		$pdf->SetAuthor('Faqih');
+	
+		$pdf->Cell(40, 4, 'Rumahku.com', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Jln. Pinangsia Raya No.42, RT.6/RW.5.', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Kec.Taman Sari,Kota Jakarta Barat', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Ln();
+		$pdf->Cell(40, 4, 'Laporan Penjualan Data', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(20, 4, 'Tanggal', 0, 0, 'L');
+		$pdf->Cell(85, 4, ' : '.$tglawal.' Sampai '.$tglakhir, 0, 0, 'L');
+		$pdf->Ln();
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		$pdf->Ln();
+		
+		$pdf->Cell(20, 5, 'Tanggal', 1, 0, 'L');
+		$pdf->Cell(25, 5, 'Kode Barang', 1, 0, 'L');
+		$pdf->Cell(40, 5, 'Nama barang', 1, 0, 'R');
+		$pdf->Cell(16, 5, 'Harga', 1, 0, 'R');
+		$pdf->Cell(10, 5, 'Qty', 1, 0, 'R');
+		$pdf->Cell(25, 5, 'Total', 1, 0, 'R');
+		//$pdf->Ln();
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		
+		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
+		    $n=0;$ttotal=0;$tqty=0;
+			foreach ($data as $row)  {
+					$n++;$ttotal=$ttotal+$row->total;
+      					$tqty=$tqty+$row->jumlah_beli;
+      				
+					
+			$pdf->Ln();
+     		$pdf->Cell(20, 5, $row->tanggal, 1, 0, 'L');
+			$pdf->Cell(25, 5, $row->kode_barang, 1, 0, 'L');
+			$pdf->Cell(40, 5, $row->nama_barang, 1, 0, 'L');
+			$pdf->Cell(16, 5, number_format($row->harga_satuan,0), 1, 0, 'R');
+			$pdf->Cell(10, 5, $row->jumlah_beli, 1, 0, 'R');
+			$pdf->Cell(25, 5, number_format($row->total,0), 1,0,'R');
+		}
+		//$pdf->Ln();
+		//$pdf->Cell(130, 5, '--------------------------------------------------------------------------------------------------------------------------', 0, 0, 'L');
+		$pdf->Ln();
+		$pdf->Cell(101, 5, 'Total', 1, 0, 'R');
+
+		$pdf->Cell(10, 5, number_format($tqty,0), 1,0,'R');
+		$pdf->Cell(25, 5, number_format($ttotal,0), 1,0,'R');
+		$pdf->Ln();
+		//$pdf->Cell(131, 5, '----------------------------------', 0, 0, 'R');
+		$pdf->Ln();
+		
+		$pdf->Cell(130, 5, "", 0, 0, 'C');
+
+		$pdf->Output();
+	//redirect(base_url().'penjualan');
+	//$this->index();.
+}
 function lpbr(){
 		$combokdbarang=$this->model_penjualan->combokdbarang();
 		$barang=array('barang'=>$combokdbarang);
@@ -511,6 +673,20 @@ function lp(){
 	$this->session->set_userdata("muncul",FALSE);
     $this->load->view('penjualan/laporan');
 }
+
+function lpbrkasir(){
+		$combokdbarang=$this->model_penjualan->combokdbarang();
+		$barang=array('barang'=>$combokdbarang);
+	$this->session->set_userdata("muncul",FALSE);
+    $this->load->view('penjualan/laporanbarang_kasir',$barang);
+}
+function lpkasir(){
+	
+    
+	$this->session->set_userdata("muncul",FALSE);
+    $this->load->view('penjualan/laporan_kasir');
+}
+
 
 public function preview_laporan_perbrg()
 {
@@ -532,6 +708,45 @@ public function preview_laporan_perbrg()
 	$data=array('laporan'=>$a,'tglawal'=>$tglawal,'tglakhir'=>$tglakhir,'barang'=>$combokdbarang);
 	$this->load->view('penjualan/laporanbarang',$data);
 }
+
+public function preview_laporan_perbrg_kasir() {
+	$this->session->set_userdata("muncul",TRUE);
+	$tglawal=$this->input->post('tglawal');
+	$tglakhir=$this->input->post('tglakhir');
+	$kode_barang=$this->input->post('barang');
+
+	$this->session->set_userdata("awal",$tglawal);
+    $this->session->set_userdata("akir",$tglakhir);
+	$this->session->set_userdata("barang",$kode_barang);
+
+
+	$a=$this->model_penjualan->laporan_penjualan_perbrg($tglawal,$tglakhir,$kode_barang);
+	$tglawal=$this->mylibrary->format_tanggal($tglawal);
+	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
+
+	$combokdbarang=$this->model_penjualan->combokdbarang();
+	$data=array('laporan'=>$a,'tglawal'=>$tglawal,'tglakhir'=>$tglakhir,'barang'=>$combokdbarang);
+	$this->load->view('penjualan/laporanbarang_kasir',$data);	
+}
+
+public function preview_laporan_kasir() {
+
+	$tglawal=$this->input->post('tglawal');
+	$tglakhir=$this->input->post('tglakhir');
+
+	$this->session->set_userdata("awal",$tglawal);
+    $this->session->set_userdata("akir",$tglakhir);
+	$this->session->set_userdata("muncul",TRUE);
+
+	$a=$this->model_penjualan->laporan_penjualan_pertgl($tglawal,$tglakhir);
+	$tglawal=$this->mylibrary->format_tanggal($tglawal);
+
+	$tglakhir=$this->mylibrary->format_tanggal($tglakhir);
+	$data=array('laporan'=>$a,'tglawal'=>$tglawal,'tglakhir'=>$tglakhir);
+	
+	$this->load->view('penjualan/laporan_kasir',$data);
+}
+
 public function preview_laporan()
 {
 	$tglawal=$this->input->post('tglawal');

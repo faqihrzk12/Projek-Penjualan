@@ -308,11 +308,6 @@
   <script src="<?php echo $vendorDirectory?>js/demo/datatables-demo.js"></script>
   <script>
     $('#dataTable').dataTable( {
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
-        "bInfo": false
-        "pageLength": 3,
       } );
   </script>
 
